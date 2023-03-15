@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const UserRoutes = require('./Routes/UserRoutes');
+const AuthRoutes = require('./Routes/AuthRoutes');
 
 router.use('/users', UserRoutes);
+router.use('/auth', AuthRoutes);
 
 //404 page
 router.use("*", (req, res) => {
