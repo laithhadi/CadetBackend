@@ -14,7 +14,6 @@ router.post("/", UsersController.create);
 router.patch("/:id", UsersController.update);
 
 //DELETE REQUESTS
-router.delete("/all", UsersController.deleteAll);
 router.delete("/:id", UsersController.delete);
 
 module.exports = router;

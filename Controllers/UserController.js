@@ -60,16 +60,6 @@ exports.update = async function (req, res) {
     }
 }
 
-exports.deleteAll = async function (req, res) {
-    try {
-        const user = await UserModel.deleteMany({ isAdmin: { $ne: true } });
-        return res.send(user);
-    } catch (error) {
-        //TODO: error handling
-        return res.status(500).send({ error: 'Something went wrong' });
-    }
-}
-
 exports.delete = async function (req, res) {
     try {
         const user = await UserModel.findByIdAndDelete(req.params.id);

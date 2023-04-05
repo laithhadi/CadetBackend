@@ -6,11 +6,13 @@ const SubjectRoutes = require('./Routes/SubjectRoutes');
 const LessonRoutes = require('./Routes/LessonRoutes');
 const LevelRoutes = require('./Routes/LevelRoutes');
 const AuthRoutes = require('./Routes/AuthRoutes');
+const AdminRoutes = require('./Routes/AdminRoutes');
 
 router.use('/users', UserRoutes);
 router.use('/levels', LevelRoutes);
 router.use('/subjects', SubjectRoutes);
 router.use('/lessons', LessonRoutes);
+router.use('/admin', AdminRoutes);
 router.use('/auth', AuthRoutes);
 
 //404 page

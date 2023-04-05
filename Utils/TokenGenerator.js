@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 
-exports.generateToken = (userId, username, isAdmin) => {
+exports.generateToken = (userId, username, role) => {
     const token = {
         userId: userId,
         username: username,
-        isAdmin: isAdmin
+        role: role
     };
 
     const options = {

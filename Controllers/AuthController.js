@@ -38,7 +38,7 @@ exports.register = async function (req, res) {
                 secretCodeObj.code.includes('DetachmentCommander') ? 'Detachment Commander' : null
         });
 
-        const token = generateToken(userInstance._id, userInstance.username, userInstance.isAdmin);
+        const token = generateToken(userInstance._id, userInstance.username, userInstance.role);
         userInstance.token = token;
 
         await userInstance.validate();
@@ -46,7 +46,11 @@ exports.register = async function (req, res) {
 
         return res.status(201).send({
             message: "Registered successfully!",
-            token,
+            token: token,
+            user: {
+                user_id: userInstance._id,
+                role: userInstance.role
+            },
             expiresIn: 3600
         });
     } catch (err) {
@@ -90,15 +94,20 @@ exports.login = async function (req, res) {
             });
         }
 
-        const token = generateToken(user._id, user.username, user.isAdmin);
+        const token = generateToken(user._id, user.username, user.role);
         user.token = token;
         await user.save();
 
         return res.status(201).send({
             message: "Logged in successfully!",
             token: token,
+            user: {
+                user_id: user._id,
+                role: user.role
+            },
             expiresIn: 3600
         });
+        
     } catch (err) {
         //TODO: other error handling
         return res.status(500).send({
