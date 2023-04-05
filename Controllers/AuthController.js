@@ -1,12 +1,21 @@
 const UserModel = require('../Models/UserSchema');
+const SecretCodeModel = require('../Models/SecretCodeSchema');
 const { generateToken } = require("../Utils/TokenGenerator");
 
 exports.register = async function (req, res) {
     try {
-        const { username, password } = req.body;
+        const { username, password, secretCode } = req.body;
 
-        if (!(username && password)) {
-            return res.status(400).send("Username/Password is required");
+        if (!(username && password && secretCode)) {
+            return res.status(400).send("Username/Password/Secret Code is required");
+        }
+
+        const secretCodeObj = await SecretCodeModel.findOne({ code: secretCode });
+
+        if (!secretCodeObj) {
+            return res.status(400).send({
+                message: "Error! Invalid secret code!"
+            });
         }
 
         const user = await UserModel.findOne({
@@ -21,7 +30,12 @@ exports.register = async function (req, res) {
 
         const userInstance = new UserModel({
             username: username,
-            password: password
+            password: password,
+            role: 
+                secretCodeObj.code.includes('Admin') ? 'Admin' :
+                secretCodeObj.code.includes('Cadet') ? 'Cadet' :
+                secretCodeObj.code.includes('Parent') ? 'Parent' :
+                secretCodeObj.code.includes('DetachmentCommander') ? 'Detachment Commander' : null
         });
 
         const token = generateToken(userInstance._id, userInstance.username, userInstance.isAdmin);
