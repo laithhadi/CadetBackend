@@ -8,6 +8,7 @@ const LevelRoutes = require('./Routes/LevelRoutes');
 const AuthRoutes = require('./Routes/AuthRoutes');
 const PlannerRoutes = require('./Routes/PlannerRoutes');
 const AdminRoutes = require('./Routes/AdminRoutes');
+const SecretCodeRoutes = require('./Routes/SecretCodeRoutes');
 
 router.use('/users', UserRoutes);
 router.use('/levels', LevelRoutes);
@@ -15,6 +16,7 @@ router.use('/subjects', SubjectRoutes);
 router.use('/lessons', LessonRoutes);
 router.use('/planner', PlannerRoutes);
 router.use('/admin', AdminRoutes);
+router.use('/secret-codes', SecretCodeRoutes);
 router.use('/auth', AuthRoutes);
 
 //404 page
