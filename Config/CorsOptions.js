@@ -1,5 +1,6 @@
 const allowedOrigins = [
-    'https://cadet-project-frontend.onrender.com'
+    'https://cadet-project-frontend.onrender.com',
+    'http://localhost:3000'
 ];
 
 const corsOptions = {
