@@ -7,7 +7,7 @@ router.use(isUserAuthenticated);
 
 //GET REQUESTS
 router.get("/cadet/:id", PlannerController.getPlansForCadet);
-
+router.get("/organiser/:id", PlannerController.getOrganiserPlans);
 
 router.use(isDetachmentCommander);
 

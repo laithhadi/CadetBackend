@@ -5,6 +5,11 @@ const plannerSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         auto: true
     },
+    organiserId: {
+        type: mongoose.Types.ObjectId,
+        ref: 'user',
+        required: [true]
+    },
     organiser: {
         type: String,
         required: [true, "Organiser is required"]
