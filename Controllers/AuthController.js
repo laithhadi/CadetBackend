@@ -4,9 +4,9 @@ const { generateToken } = require("../Utils/TokenGenerator");
 
 exports.register = async function (req, res) {
     try {
-        const { username, password, secretCode } = req.body;
+        const { username, password, firstName, surname, secretCode } = req.body;
 
-        if (!(username && password && secretCode)) {
+        if (!(username && password && firstName && surname && secretCode)) {
             return res.status(400).send("Username/Password/Secret Code is required");
         }
 
@@ -31,6 +31,8 @@ exports.register = async function (req, res) {
         const userInstance = new UserModel({
             username: username,
             password: password,
+            firstName: firstName,
+            surname: surname,
             role: 
                 secretCodeObj.code.includes('Admin') ? 'Admin' :
                 secretCodeObj.code.includes('Cadet') ? 'Cadet' :
@@ -49,7 +51,8 @@ exports.register = async function (req, res) {
             token: token,
             user: {
                 user_id: userInstance._id,
-                role: userInstance.role
+                role: userInstance.role,
+                name: firstName + " " + surname
             },
             expiresIn: 3600
         });
@@ -103,7 +106,8 @@ exports.login = async function (req, res) {
             token: token,
             user: {
                 user_id: user._id,
-                role: user.role
+                role: user.role,
+                name: user.firstName + " " + user.surname
             },
             expiresIn: 3600
         });

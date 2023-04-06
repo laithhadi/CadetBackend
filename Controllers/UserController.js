@@ -20,6 +20,16 @@ exports.show = async function (req, res) {
     }
 }
 
+exports.getAllCadets = async function (req, res) {
+    try {
+        const cadets = await UserModel.find({ role: "Cadet" });
+        return res.send(cadets);
+    } catch (error) {
+        //TODO: error handling
+        return res.status(500).send({ error: 'Something went wrong' });
+    }
+}
+
 exports.create = async function (req, res) {
     try {
         const request = req.body;
@@ -27,6 +37,9 @@ exports.create = async function (req, res) {
         const userInstance = new UserModel({
             username: request.username,
             password: request.password,
+            firstName: request.firstName,
+            surname: request.surname,
+            role: request.role
         });
 
         await userInstance.validate();

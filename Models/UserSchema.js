@@ -17,6 +17,18 @@ const userSchema = new mongoose.Schema({
         required: [true, "Password is required"],
         maxLength: [100, "Password must not exceed more than 40 characters"]
     },
+    firstName: {
+        type: String,
+        required: [true, "First name is required"],
+        unique: true,
+        maxLength: [40, "First name must not exceed more than 40 characters"]
+    },
+    surname: {
+        type: String,
+        required: [true, "Surname is required"],
+        unique: true,
+        maxLength: [40, "Surname must not exceed more than 40 characters"]
+    },
     role: {
         type: String,
         required: true,

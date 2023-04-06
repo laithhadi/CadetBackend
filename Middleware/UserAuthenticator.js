@@ -26,3 +26,12 @@ exports.isAdmin = (req, res, next) => {
     }
     next();
 };
+
+exports.isDetachmentCommander = (req, res, next) => {
+    if (req.user.role !== "Detachment Commander") {
+        return res.status(403).send({
+            message: "Access Denied!"
+        });
+    }
+    next();
+};
