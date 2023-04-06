@@ -24,6 +24,7 @@ exports.create = async function (req, res) {
         const cadetIds = request.cadets.split(',').map(cadetId => new mongoose.Types.ObjectId(cadetId));
 
         const plannerInstance = new PlannerModel({
+            organiser: request.organiser,
             planDate: request.planDate,
             starLevel: new mongoose.Types.ObjectId(request.starLevel),
             subject: new mongoose.Types.ObjectId(request.subject),

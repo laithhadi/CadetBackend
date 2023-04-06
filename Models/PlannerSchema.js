@@ -5,6 +5,10 @@ const plannerSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         auto: true
     },
+    organiser: {
+        type: String,
+        required: [true, "Organiser is required"]
+    },
     planDate: {
         type: Date,
         required: [true, 'Event start date is required'],
